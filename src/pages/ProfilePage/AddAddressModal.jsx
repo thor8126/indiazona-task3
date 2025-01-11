@@ -89,7 +89,14 @@ const AddAddressModal = ({ open, onClose, onSave }) => {
         onChange={handleChange}
         sx={{ display: "flex", flexDirection: "column" }}
       >
-        <Box sx={{ display: "flex", gap: 4, mb: 2 }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", sm: "row" },
+            gap: { xs: 1, sm: 4 },
+            mb: 2,
+          }}
+        >
           <StyledFormControlLabel
             value="home"
             control={<StyledRadio />}
@@ -184,7 +191,18 @@ const AddAddressModal = ({ open, onClose, onSave }) => {
   );
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      maxWidth="sm"
+      fullWidth
+      PaperProps={{
+        sx: {
+          width: { xs: "95%", sm: "600px" },
+          margin: { xs: "16px", sm: "auto" },
+        },
+      }}
+    >
       <DialogTitle>
         <Box display="flex" justifyContent="space-between" alignItems="center">
           Add New Address
@@ -197,7 +215,11 @@ const AddAddressModal = ({ open, onClose, onSave }) => {
       <form onSubmit={handleSubmit}>
         <DialogContent>
           <Box display="flex" flexDirection="column" gap={2}>
-            <Box display="flex" gap={2}>
+            <Box
+              display="flex"
+              flexDirection={{ xs: "column", sm: "row" }}
+              gap={2}
+            >
               <TextField
                 name="name"
                 label="Name"
@@ -216,7 +238,11 @@ const AddAddressModal = ({ open, onClose, onSave }) => {
               />
             </Box>
 
-            <Box display="flex" gap={2}>
+            <Box
+              display="flex"
+              flexDirection={{ xs: "column", sm: "row" }}
+              gap={2}
+            >
               <TextField
                 name="pincode"
                 label="Pincode"
@@ -246,7 +272,11 @@ const AddAddressModal = ({ open, onClose, onSave }) => {
               size="small"
             />
 
-            <Box display="flex" gap={2}>
+            <Box
+              display="flex"
+              flexDirection={{ xs: "column", sm: "row" }}
+              gap={2}
+            >
               <TextField
                 name="city"
                 label="City / District"
@@ -256,14 +286,14 @@ const AddAddressModal = ({ open, onClose, onSave }) => {
                 size="small"
               />
               <FormControl fullWidth size="small">
-                <InputLabel>State</InputLabel>
+                <InputLabel shrink>State</InputLabel>
                 <Select
                   name="state"
                   value={formData.state}
                   onChange={handleChange}
                   label="State"
                   displayEmpty
-                  placeholder="Select from Dropdown"
+                  notched
                   renderValue={(selected) => {
                     if (!selected) {
                       return "Select from Dropdown";
@@ -281,7 +311,11 @@ const AddAddressModal = ({ open, onClose, onSave }) => {
               </FormControl>
             </Box>
 
-            <Box display="flex" gap={2}>
+            <Box
+              display="flex"
+              flexDirection={{ xs: "column", sm: "row" }}
+              gap={2}
+            >
               <TextField
                 name="landmark"
                 label="Landmark (Optional)"
@@ -304,12 +338,18 @@ const AddAddressModal = ({ open, onClose, onSave }) => {
           </Box>
         </DialogContent>
 
-        <DialogActions sx={{ p: 2.5, gap: 2 }}>
+        <DialogActions
+          sx={{
+            p: 2.5,
+            gap: 2,
+            flexDirection: { xs: "column", sm: "row" },
+          }}
+        >
           <Button
             onClick={onClose}
             variant="outlined"
+            fullWidth
             sx={{
-              flex: 1,
               textTransform: "none",
               borderColor: "#E0E0E0",
               color: "#212121",
@@ -320,8 +360,8 @@ const AddAddressModal = ({ open, onClose, onSave }) => {
           <Button
             type="submit"
             variant="contained"
+            fullWidth
             sx={{
-              flex: 1,
               bgcolor: "#ff7043",
               "&:hover": { bgcolor: "#f4511e" },
               textTransform: "none",
