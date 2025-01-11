@@ -1,0 +1,12 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+* {
+  font-family: "Montserrat", serif;
+}
+input:-webkit-autofill,
+.my-class:-webkit-autofill {
+  -webkit-transition-delay: 9999999s;
+}
