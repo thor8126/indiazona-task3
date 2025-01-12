@@ -1,126 +1,242 @@
-# Project Setup and Testing Guide
+# Wishlist API Documentation
 
-This guide explains how to set up the project, add test data, generate a test token, and use the provided Postman collection for API testing.
+## Setup
 
----
+1. Import the Postman collection JSON files into Postman
+2. Set up environment variable:
+   - `baseUrl`: Default is `http://localhost:3000`
 
-## **1. Add Sample Products**
+## API Endpoints
 
-To add initial sample products to the database, execute the following SQL command:
+### Users
 
-```sql
-INSERT INTO products (
-    product_name,
-    brand_id,
-    packed_weight,
-    product_description,
-    thumbnail_image_url,
-    is_active,
-    created_on,
-    updated_on
-) VALUES
-    ('Wireless Earbuds', 2, 0.15, 'Compact and high-quality wireless earbuds.', 'https://example.com/wireless-earbuds.jpg', true, NOW(), NOW()),
-    ('Gaming Mouse', 3, 0.25, 'Ergonomic gaming mouse with customizable buttons.', 'https://example.com/gaming-mouse.jpg', true, NOW(), NOW()),
-    ('Smartphone Stand', 4, 0.50, 'Durable and adjustable stand for smartphones.', 'https://example.com/smartphone-stand.jpg', true, NOW(), NOW()),
-    ('Bluetooth Speaker', 5, 1.20, 'Portable Bluetooth speaker with powerful bass.', 'https://example.com/bluetooth-speaker.jpg', true, NOW(), NOW());
+#### Create User
+
+- **Method**: POST
+- **Endpoint**: `/api/users`
+- **Body**:
+
+```json
+{
+  "name": "John Doe",
+  "email": "john.doe@example.com"
+}
 ```
 
-## **2. Add a Test User**
+#### Get All Users
 
-Add a test user to the `users` table with the following SQL command:
+- **Method**: GET
+- **Endpoint**: `/api/users`
 
-```sql
-INSERT INTO users (role_id, name, email)
-VALUES (1, 'Test User', 'test@example.com');
+### Products
+
+#### Create Product
+
+- **Method**: POST
+- **Endpoint**: `/api/products`
+- **Body**:
+
+```json
+{
+  "name": "Smartphone X",
+  "description": "Latest smartphone with amazing features",
+  "price": 999.99,
+  "image_url": "https://example.com/smartphone-x.jpg",
+  "stock": 50
+}
 ```
 
-Note:
-Replace role_id with the appropriate role ID for the test user if applicable.
+#### Get All Products
 
-## **3. Generate a Test Token**
+- **Method**: GET
+- **Endpoint**: `/api/products`
 
-To generate a test token for API testing, send a `POST` request to the following route:
+#### Get Product by ID
 
-### Route:
+- **Method**: GET
+- **Endpoint**: `/api/products/:id`
 
-```
-POST localhost:3000/api/test-token
-```
+#### Update Product
 
-### Steps to Generate the Token:
+- **Method**: PUT
+- **Endpoint**: `/api/products/:id`
+- **Body**: Same as Create Product
 
-1. Ensure your application is running.
-2. Use a tool like **Postman** or **cURL** to send a `POST` request to `/api/test-token`.
-3. The response will include the generated JWT token.
+#### Delete Product
 
-### Notes:
+- **Method**: DELETE
+- **Endpoint**: `/api/products/:id`
 
-- The JWT will be valid for 1 hour or based on the expiration settings in your application.
-- Include the generated token in the `Authorization` header for subsequent API requests that require authentication.
+### Wishlists
 
-## **4. Use the Postman Collection**
+#### Create or Get Wishlist
 
-### Import Postman Collection:
+- **Method**: POST
+- **Endpoint**: `/api/wishlists`
+- **Body**:
 
-1. Open **Postman**.
-2. Click on the **Import** button in the toolbar.
-3. Upload the provided `.json` file containing the Postman collection for this project.
-
-### Using the Collection:
-
-- The collection includes preconfigured requests for testing the API endpoints.
-- For secured endpoints:
-  1. Generate a test token using the `/api/test-token` route.
-  2. Copy the generated JWT token.
-  3. In Postman, add the token to the `Authorization` header using the `Bearer <token>` format.
-
-### Notes:
-
-- The Postman collection covers endpoints for product management, user management, and token validation.
-- Update the base URL in the collection if your application is running on a different port or domain.
-
-### Example Authorization Header:
-
-```
-Authorization: Bearer <your_generated_token>
+```json
+{
+  "user_id": 1,
+  "name": "My Custom Wishlist"
+}
 ```
 
-Once imported, you can use Postman to test all the available API routes easily.
+#### Get User's Wishlist
 
-To run this project:
+- **Method**: GET
+- **Endpoint**: `/api/wishlists/user/:userId`
 
-1. Installation:
+### Collections
 
-```bash
-npm install
+#### Create Collection
+
+- **Method**: POST
+- **Endpoint**: `/api/wishlists/:wishlistId/collections`
+- **Body**:
+
+```json
+{
+  "name": "Summer Collection"
+}
 ```
 
-2. Configure environment variables in `.env`
+#### Get Wishlist Collections
 
-3. Run migrations:
+- **Method**: GET
+- **Endpoint**: `/api/wishlists/:wishlistId/collections`
 
-```bash
-npx sequelize-cli db:migrate
+#### Update Collection
+
+- **Method**: PUT
+- **Endpoint**: `/api/collections/:id`
+- **Body**:
+
+```json
+{
+  "name": "Updated Collection Name"
+}
 ```
 
-4. Start the server:
+#### Delete Collection
 
-```bash
-npm run dev
+- **Method**: DELETE
+- **Endpoint**: `/api/collections/:id`
+
+### Collection Items
+
+#### Add Item to Collection
+
+- **Method**: POST
+- **Endpoint**: `/api/collections/:collectionId/items`
+- **Body**:
+
+```json
+{
+  "product_id": 123
+}
 ```
 
-API Documentation:
+#### Remove Item from Collection
 
-Collections:
+- **Method**: DELETE
+- **Endpoint**: `/api/collections/:collectionId/items/:itemId`
 
-- `POST /api/collections` - Create a new collection
-- `GET /api/collections` - Get all collections for authenticated user
-- `PUT /api/collections/:id` - Update a collection
-- `DELETE /api/collections/:id` - Delete a collection
+## Usage Examples
 
-Wishlist Items:
+### Complete Flow Example
 
-- `POST /api/wishlist/items` - Add item to collection
-- `GET /api/wishlist/items/:collection_id` - Get items in a collection
-- `GET /api/wishlist/items` - Get all wishlist items
-- `DELETE /api/wishlist/items/:id` - Delete an item
+1. Create a User:
+
+```json
+POST /api/users
+{
+    "name": "John Doe",
+    "email": "john.doe@example.com"
+}
+```
+
+2. Create a Product:
+
+```json
+POST /api/products
+{
+    "name": "Smartphone X",
+    "description": "Latest smartphone with amazing features",
+    "price": 999.99,
+    "image_url": "https://example.com/smartphone-x.jpg",
+    "stock": 50
+}
+```
+
+3. Create a Wishlist for the User:
+
+```json
+POST /api/wishlists
+{
+    "user_id": 1,
+    "name": "My Tech Wishlist"
+}
+```
+
+4. Create a Collection in the Wishlist:
+
+```json
+POST /api/wishlists/1/collections
+{
+    "name": "Gadgets Collection"
+}
+```
+
+5. Add Product to Collection:
+
+```json
+POST /api/collections/1/items
+{
+    "product_id": 1
+}
+```
+
+## Response Examples
+
+### Successful User Creation
+
+```json
+{
+  "id": 1,
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "created_at": "2025-01-12T10:00:00.000Z",
+  "updated_at": "2025-01-12T10:00:00.000Z"
+}
+```
+
+### Successful Wishlist Creation
+
+```json
+{
+  "id": 1,
+  "user_id": 1,
+  "name": "My Tech Wishlist",
+  "created_at": "2025-01-12T10:05:00.000Z",
+  "updated_at": "2025-01-12T10:05:00.000Z"
+}
+```
+
+## Error Handling
+
+The API returns appropriate HTTP status codes:
+
+- 200: Success
+- 201: Created
+- 400: Bad Request
+- 404: Not Found
+- 500: Server Error
+
+Error responses include a message:
+
+```json
+{
+  "message": "Error description here"
+}
+```

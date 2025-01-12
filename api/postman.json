@@ -1,23 +1,58 @@
 {
     "info": {
-        "_postman_id": "b8f5e3c2-1d34-4567-8901-234567890abc",
-        "name": "Wishlist API Collection",
-        "description": "Complete collection of API endpoints for the Wishlist system",
+        "name": "Wishlist API",
         "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
-    "variable": [
-        {
-            "key": "base_url",
-            "value": "http://localhost:3000/api",
-            "type": "string"
-        },
-        {
-            "key": "token",
-            "value": "your_jwt_token_here",
-            "type": "string"
-        }
-    ],
     "item": [
+        {
+            "name": "Wishlists",
+            "item": [
+                {
+                    "name": "Create or Get Wishlist",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/wishlists",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "wishlists"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"user_id\": 1,\n    \"name\": \"My Custom Wishlist\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Get User's Wishlist",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/wishlists/user/1",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "wishlists",
+                                "user",
+                                "1"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
         {
             "name": "Collections",
             "item": [
@@ -29,89 +64,43 @@
                             {
                                 "key": "Content-Type",
                                 "value": "application/json"
-                            },
-                            {
-                                "key": "Authorization",
-                                "value": "Bearer {{token}}"
                             }
                         ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/wishlists/1/collections",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "wishlists",
+                                "1",
+                                "collections"
+                            ]
+                        },
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"My Favorite Items\"\n}"
-                        },
-                        "url": {
-                            "raw": "{{base_url}}/collections",
-                            "host": [
-                                "{{base_url}}"
-                            ],
-                            "path": [
-                                "collections"
-                            ]
-                        },
-                        "description": "Create a new collection for the authenticated user"
-                    },
-                    "response": [
-                        {
-                            "name": "Success Response",
-                            "originalRequest": {
-                                "method": "POST",
-                                "header": [],
-                                "body": {
-                                    "mode": "raw",
-                                    "raw": "{\n    \"name\": \"My Favorite Items\"\n}"
-                                },
-                                "url": {
-                                    "raw": "{{base_url}}/collections"
-                                }
-                            },
-                            "status": "Created",
-                            "code": 201,
-                            "_postman_previewlanguage": "json",
-                            "header": [],
-                            "cookie": [],
-                            "body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"My Favorite Items\",\n        \"user_id\": 1,\n        \"created_at\": \"2025-01-11T10:00:00.000Z\"\n    }\n}"
+                            "raw": "{\n    \"name\": \"Summer Collection\"\n}"
                         }
-                    ]
+                    }
                 },
                 {
-                    "name": "Get All Collections",
+                    "name": "Get Wishlist Collections",
                     "request": {
                         "method": "GET",
-                        "header": [
-                            {
-                                "key": "Authorization",
-                                "value": "Bearer {{token}}"
-                            }
-                        ],
                         "url": {
-                            "raw": "{{base_url}}/collections",
+                            "raw": "{{baseUrl}}/api/wishlists/1/collections",
                             "host": [
-                                "{{base_url}}"
+                                "{{baseUrl}}"
                             ],
                             "path": [
+                                "api",
+                                "wishlists",
+                                "1",
                                 "collections"
                             ]
-                        },
-                        "description": "Get all collections for the authenticated user"
-                    },
-                    "response": [
-                        {
-                            "name": "Success Response",
-                            "originalRequest": {
-                                "method": "GET",
-                                "header": [],
-                                "url": {
-                                    "raw": "{{base_url}}/collections"
-                                }
-                            },
-                            "status": "OK",
-                            "code": 200,
-                            "_postman_previewlanguage": "json",
-                            "header": [],
-                            "cookie": [],
-                            "body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"My Favorite Items\",\n            \"user_id\": 1,\n            \"created_at\": \"2025-01-11T10:00:00.000Z\",\n            \"WishListItems\": [\n                {\n                    \"id\": 1,\n                    \"product_id\": 1,\n                    \"Product\": {\n                        \"id\": 1,\n                        \"product_name\": \"Sample Product\"\n                    }\n                }\n            ]\n        }\n    ]\n}"
                         }
-                    ]
+                    }
                 },
                 {
                     "name": "Update Collection",
@@ -121,96 +110,46 @@
                             {
                                 "key": "Content-Type",
                                 "value": "application/json"
-                            },
-                            {
-                                "key": "Authorization",
-                                "value": "Bearer {{token}}"
                             }
                         ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n    \"name\": \"Updated Collection Name\"\n}"
-                        },
                         "url": {
-                            "raw": "{{base_url}}/collections/1",
+                            "raw": "{{baseUrl}}/api/collections/1",
                             "host": [
-                                "{{base_url}}"
+                                "{{baseUrl}}"
                             ],
                             "path": [
+                                "api",
                                 "collections",
                                 "1"
                             ]
                         },
-                        "description": "Update an existing collection"
-                    },
-                    "response": [
-                        {
-                            "name": "Success Response",
-                            "originalRequest": {
-                                "method": "PUT",
-                                "header": [],
-                                "body": {
-                                    "mode": "raw",
-                                    "raw": "{\n    \"name\": \"Updated Collection Name\"\n}"
-                                },
-                                "url": {
-                                    "raw": "{{base_url}}/collections/1"
-                                }
-                            },
-                            "status": "OK",
-                            "code": 200,
-                            "_postman_previewlanguage": "json",
-                            "header": [],
-                            "cookie": [],
-                            "body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"Updated Collection Name\",\n        \"user_id\": 1,\n        \"created_at\": \"2025-01-11T10:00:00.000Z\"\n    }\n}"
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Updated Collection Name\"\n}"
                         }
-                    ]
+                    }
                 },
                 {
                     "name": "Delete Collection",
                     "request": {
                         "method": "DELETE",
-                        "header": [
-                            {
-                                "key": "Authorization",
-                                "value": "Bearer {{token}}"
-                            }
-                        ],
                         "url": {
-                            "raw": "{{base_url}}/collections/1",
+                            "raw": "{{baseUrl}}/api/collections/1",
                             "host": [
-                                "{{base_url}}"
+                                "{{baseUrl}}"
                             ],
                             "path": [
+                                "api",
                                 "collections",
                                 "1"
                             ]
-                        },
-                        "description": "Delete a collection"
-                    },
-                    "response": [
-                        {
-                            "name": "Success Response",
-                            "originalRequest": {
-                                "method": "DELETE",
-                                "header": [],
-                                "url": {
-                                    "raw": "{{base_url}}/collections/1"
-                                }
-                            },
-                            "status": "No Content",
-                            "code": 204,
-                            "_postman_previewlanguage": "text",
-                            "header": [],
-                            "cookie": [],
-                            "body": ""
                         }
-                    ]
+                    }
                 }
             ]
         },
         {
-            "name": "Wishlist Items",
+            "name": "Collection Items",
             "item": [
                 {
                     "name": "Add Item to Collection",
@@ -220,177 +159,208 @@
                             {
                                 "key": "Content-Type",
                                 "value": "application/json"
-                            },
-                            {
-                                "key": "Authorization",
-                                "value": "Bearer {{token}}"
                             }
                         ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/collections/1/items",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "collections",
+                                "1",
+                                "items"
+                            ]
+                        },
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"product_id\": 1,\n    \"collection_id\": 1\n}"
-                        },
-                        "url": {
-                            "raw": "{{base_url}}/wishlist/items",
-                            "host": [
-                                "{{base_url}}"
-                            ],
-                            "path": [
-                                "wishlist",
-                                "items"
-                            ]
-                        },
-                        "description": "Add a new item to a collection"
-                    },
-                    "response": [
-                        {
-                            "name": "Success Response",
-                            "originalRequest": {
-                                "method": "POST",
-                                "header": [],
-                                "body": {
-                                    "mode": "raw",
-                                    "raw": "{\n    \"product_id\": 1,\n    \"collection_id\": 1\n}"
-                                },
-                                "url": {
-                                    "raw": "{{base_url}}/wishlist/items"
-                                }
-                            },
-                            "status": "Created",
-                            "code": 201,
-                            "_postman_previewlanguage": "json",
-                            "header": [],
-                            "cookie": [],
-                            "body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": 1,\n        \"user_id\": 1,\n        \"product_id\": 1,\n        \"collection_id\": 1,\n        \"created_at\": \"2025-01-11T10:00:00.000Z\",\n        \"Product\": {\n            \"id\": 1,\n            \"product_name\": \"Sample Product\"\n        }\n    }\n}"
+                            "raw": "{\n    \"product_id\": 123\n}"
                         }
-                    ]
+                    }
                 },
                 {
-                    "name": "Get Items in Collection",
-                    "request": {
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Authorization",
-                                "value": "Bearer {{token}}"
-                            }
-                        ],
-                        "url": {
-                            "raw": "{{base_url}}/wishlist/items/1",
-                            "host": [
-                                "{{base_url}}"
-                            ],
-                            "path": [
-                                "wishlist",
-                                "items",
-                                "1"
-                            ]
-                        },
-                        "description": "Get all items in a specific collection"
-                    },
-                    "response": [
-                        {
-                            "name": "Success Response",
-                            "originalRequest": {
-                                "method": "GET",
-                                "header": [],
-                                "url": {
-                                    "raw": "{{base_url}}/wishlist/items/1"
-                                }
-                            },
-                            "status": "OK",
-                            "code": 200,
-                            "_postman_previewlanguage": "json",
-                            "header": [],
-                            "cookie": [],
-                            "body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": 1,\n            \"user_id\": 1,\n            \"product_id\": 1,\n            \"collection_id\": 1,\n            \"created_at\": \"2025-01-11T10:00:00.000Z\",\n            \"Product\": {\n                \"id\": 1,\n                \"product_name\": \"Sample Product\"\n            }\n        }\n    ]\n}"
-                        }
-                    ]
-                },
-                {
-                    "name": "Get All Wishlist Items",
-                    "request": {
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Authorization",
-                                "value": "Bearer {{token}}"
-                            }
-                        ],
-                        "url": {
-                            "raw": "{{base_url}}/wishlist/items",
-                            "host": [
-                                "{{base_url}}"
-                            ],
-                            "path": [
-                                "wishlist",
-                                "items"
-                            ]
-                        },
-                        "description": "Get all wishlist items for the authenticated user"
-                    },
-                    "response": [
-                        {
-                            "name": "Success Response",
-                            "originalRequest": {
-                                "method": "GET",
-                                "header": [],
-                                "url": {
-                                    "raw": "{{base_url}}/wishlist/items"
-                                }
-                            },
-                            "status": "OK",
-                            "code": 200,
-                            "_postman_previewlanguage": "json",
-                            "header": [],
-                            "cookie": [],
-                            "body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": 1,\n            \"user_id\": 1,\n            \"product_id\": 1,\n            \"collection_id\": 1,\n            \"created_at\": \"2025-01-11T10:00:00.000Z\",\n            \"Product\": {\n                \"id\": 1,\n                \"product_name\": \"Sample Product\"\n            },\n            \"Collection\": {\n                \"id\": 1,\n                \"name\": \"My Favorite Items\"\n            }\n        }\n    ]\n}"
-                        }
-                    ]
-                },
-                {
-                    "name": "Delete Wishlist Item",
+                    "name": "Remove Item from Collection",
                     "request": {
                         "method": "DELETE",
-                        "header": [
-                            {
-                                "key": "Authorization",
-                                "value": "Bearer {{token}}"
-                            }
-                        ],
                         "url": {
-                            "raw": "{{base_url}}/wishlist/items/1",
+                            "raw": "{{baseUrl}}/api/collections/1/items/1",
                             "host": [
-                                "{{base_url}}"
+                                "{{baseUrl}}"
                             ],
                             "path": [
-                                "wishlist",
+                                "api",
+                                "collections",
+                                "1",
                                 "items",
                                 "1"
                             ]
-                        },
-                        "description": "Delete a wishlist item"
-                    },
-                    "response": [
-                        {
-                            "name": "Success Response",
-                            "originalRequest": {
-                                "method": "DELETE",
-                                "header": [],
-                                "url": {
-                                    "raw": "{{base_url}}/wishlist/items/1"
-                                }
-                            },
-                            "status": "No Content",
-                            "code": 204,
-                            "_postman_previewlanguage": "text",
-                            "header": [],
-                            "cookie": [],
-                            "body": ""
                         }
-                    ]
+                    }
                 }
             ]
+        },
+        {
+            "name": "Users",
+            "item": [
+                {
+                    "name": "Create User",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/users",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "users"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@example.com\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Get All Users",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/users",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "users"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Products",
+            "item": [
+                {
+                    "name": "Create Product",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/products",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "products"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Smartphone X\",\n    \"description\": \"Latest smartphone with amazing features\",\n    \"price\": 999.99,\n    \"image_url\": \"https://example.com/smartphone-x.jpg\",\n    \"stock\": 50\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Get All Products",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/products",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "products"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Product by ID",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/products/1",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "products",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Update Product",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/products/1",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "products",
+                                "1"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Updated Smartphone X\",\n    \"description\": \"Updated description\",\n    \"price\": 899.99,\n    \"image_url\": \"https://example.com/smartphone-x-updated.jpg\",\n    \"stock\": 45\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Delete Product",
+                    "request": {
+                        "method": "DELETE",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/products/1",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "products",
+                                "1"
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "variable": [
+        {
+            "key": "baseUrl",
+            "value": "http://localhost:3000",
+            "type": "string"
         }
     ]
 }
