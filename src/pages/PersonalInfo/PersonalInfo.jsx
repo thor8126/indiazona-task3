@@ -12,7 +12,7 @@ import {
   DialogContent,
   DialogActions,
 } from "@mui/material";
-import ChangePasswordModal from "./ChangePasswordModal";
+import ChangePasswordModal from "./components/ChangePasswordModal";
 
 const commonTextFieldSx = {
   "& .MuiOutlinedInput-root": {
@@ -354,7 +354,15 @@ const PersonalInfoView = ({ user }) => {
     </Box>
   );
   return (
-    <Box sx={{ flex: 1, width: "100%" }}>
+    <Box
+      sx={{
+        flex: 1,
+        width: "100%",
+        paddingX: "0.5rem",
+        paddingY: "2rem",
+        paddingRight: "2rem",
+      }}
+    >
       <Box
         sx={{
           display: { xs: "block", md: "flex" },

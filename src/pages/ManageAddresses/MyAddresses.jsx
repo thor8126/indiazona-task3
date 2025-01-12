@@ -13,32 +13,13 @@ import {
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
-import AddAddressModal from "./AddAddressModal";
+import AddAddressModal from "./modals/AddAddressModal";
 
-const MyAddresses = () => {
+const MyAddresses = ({ addresses }) => {
   const [selectedAddress, setSelectedAddress] = useState("7667434402");
   const [openAddressModal, setOpenAddressModal] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
-  // Sample address data
-  const addresses = [
-    {
-      id: "7667434402",
-      name: "Shubham Kumar Kurrey",
-      address:
-        "Door No. 43-4-12/1, 2nd Floor, Vyshvaa Magnum, Opp. Indian Oil, Railway New Colony",
-      area: "Visakhapatnam, Andhra Pradesh - 530016",
-      type: "Home",
-    },
-    {
-      id: "7667434403",
-      name: "Shubham Kumar Kurrey",
-      address: "Flat no 402, Karthikeya Paradise, Railway New Colony",
-      area: "Visakhapatnam, Andhra Pradesh - 530016",
-      type: "Home",
-    },
-  ];
 
   const handleAddressChange = (event) => {
     setSelectedAddress(event.target.value);

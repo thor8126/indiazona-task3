@@ -9,16 +9,16 @@ import {
   useMediaQuery,
   Divider,
 } from "@mui/material";
-import BreadCrumbs from "../MyOrders/BreadCrumbs";
+import BreadCrumbs from "../MyOrders/components/modal/BreadCrumbs";
 import img from "./image.png";
 import cancelImg from "./cancelmodal.png";
 
-import ProductDetail from "./ProductDetail";
-import ReturnForm from "./ReturnForm";
-import Tracker from "./Tracker";
-import DeliveryInfo from "./DeliveryInfo";
-import OrderSummary from "./OrderSummary";
-import CancelModal from "./CancelModal";
+import ProductDetail from "./components/ProductDetail";
+import ReturnForm from "./components/ReturnForm";
+import Tracker from "./components/Tracker";
+import DeliveryInfo from "./components/DeliveryInfo";
+import OrderSummary from "./components/OrderSummary";
+import CancelModal from "./components/modal/CancelModal";
 
 const OrderTracking = () => {
   const location = useLocation();

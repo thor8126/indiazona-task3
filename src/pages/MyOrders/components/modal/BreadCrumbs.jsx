@@ -32,7 +32,6 @@ const BreadCrumbs = ({ items = [], isReturn = false }) => {
     <Breadcrumbs
       separator={<NavigateNextIcon fontSize={isMobile ? "small" : "large"} />}
       sx={{
-        mb: 1,
         "& .MuiBreadcrumbs-separator": {
           mx: isMobile ? 0.6 : 1,
         },

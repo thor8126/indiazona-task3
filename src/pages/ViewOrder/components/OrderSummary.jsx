@@ -1,7 +1,7 @@
-import image2 from "./image2.png";
-import image3 from "./image3.png";
-import image4 from "./image4.png";
-import image5 from "./image5.png";
+import image2 from "../assets/image2.png";
+import image3 from "../assets/image3.png";
+import image4 from "../assets/image4.png";
+import image5 from "../assets/image5.png";
 import React, { useState } from "react";
 import {
   Box,

@@ -11,10 +11,10 @@ import {
   Divider,
   CircularProgress,
 } from "@mui/material";
-import UploadModal from "./UploadModal";
+import UploadModal from "./modal/UploadModal";
 import CloseIcon from "@mui/icons-material/Close";
 import uploadImage from "./upload.png";
-import { uploadFiles } from "../../services/index";
+import { uploadFiles } from "../../../services/index";
 import { styled } from "@mui/system";
 
 const CustomRadio = styled(Radio)({

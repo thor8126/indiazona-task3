@@ -1,13 +1,9 @@
 import React, { useState } from "react";
 import { Box, Button, Paper, Typography, Collapse } from "@mui/material";
-import {
-  Cancel,
-  KeyboardArrowDown,
-  KeyboardArrowUp,
-} from "@mui/icons-material";
+import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import { styled } from "@mui/material/styles";
-import ResponsiveStepper from "./ResponsiveStepper";
-import CancelledStepper from "./CancelledStepper";
+import ResponsiveStepper from "./stepper/ResponsiveStepper";
+import CancelledStepper from "./stepper/CancelledStepper";
 
 const steps = ["Order Confirmed", "Shipped", "Out For Delivery", "Delivered"];
 

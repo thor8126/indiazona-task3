@@ -9,13 +9,13 @@ import {
   useMediaQuery,
   Divider,
 } from "@mui/material";
-import BreadCrumbs from "./BreadCrumbs";
-import img from "./image.png";
+import BreadCrumbs from "./components/BreadCrumbs";
+import img from "./assets/image.png";
 
-import ProductDetail from "./ProductDetail";
-import Tracker from "./Tracker";
-import DeliveryInfo from "./DeliveryInfo";
-import OrderSummary from "./OrderSummary";
+import ProductDetail from "./components/ProductDetail";
+import Tracker from "./components/Tracker";
+import DeliveryInfo from "./components/DeliveryInfo";
+import OrderSummary from "./components/OrderSummary";
 
 const ViewOrder = () => {
   const location = useLocation();

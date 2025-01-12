@@ -14,54 +14,10 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import image1 from "./product1.png";
-import { DeleteCollectionModal, EditNameModal } from "./Modals";
 
-// Collections data
-const collections = [
-  {
-    id: 1,
-    title: "Women's Collection",
-    image: image1,
-  },
-  {
-    id: 2,
-    title: "Men's Collection",
-    image: image1,
-  },
-  {
-    id: 3,
-    title: "New Collection",
-    image: image1,
-  },
-];
+import { DeleteCollectionModal, EditNameModal } from "./modals/Modals";
 
-// Wishlist data
-const wishlistItems = [
-  {
-    id: 1,
-    name: "Men's Heavy Neck Popcorn Knit",
-    price: 999,
-    originalPrice: 1299,
-    image: image1,
-  },
-  {
-    id: 2,
-    name: "Split High Waist 90's Denim",
-    price: 599,
-    originalPrice: 999,
-    image: image1,
-  },
-  {
-    id: 3,
-    name: "Embellished Pointed Toe Kitten",
-    price: 700,
-    originalPrice: 1639,
-    image: image1,
-  },
-];
-
-export default function WishlistPage() {
+export default function WishlistPage({ wishlistItems, collections }) {
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [selectedCollection, setSelectedCollection] = useState(null);
