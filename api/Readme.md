@@ -1,242 +1,171 @@
-# Wishlist API Documentation
+# Wishlist Management System API
 
-## Setup
+A complete REST API system for managing wishlists, collections, and products with user authentication.
 
-1. Import the Postman collection JSON files into Postman
-2. Set up environment variable:
-   - `baseUrl`: Default is `http://localhost:3000`
+## Setup & Installation
+
+1. First, populate the database with initial data required for testing:
+
+```sql
+-- Run these SQL scripts in sequence to populate required tables
+-- 1. Insert brands
+INSERT INTO brands (name, created_at, updated_at) VALUES
+('Apple', NOW(), NOW()),
+('Samsung', NOW(), NOW()),
+('Sony', NOW(), NOW());
+
+-- 2. Insert HSN codes
+INSERT INTO hsn_codes (code, description, created_at, updated_at) VALUES
+('8517', 'Mobile Phones and Electronics', NOW(), NOW()),
+('8471', 'Computers and Accessories', NOW(), NOW()),
+('8518', 'Audio Equipment', NOW(), NOW());
+
+-- 3. Insert user roles
+INSERT INTO user_roles (name, created_at, updated_at) VALUES
+('Admin', NOW(), NOW()),
+('Customer', NOW(), NOW());
+```
+
+2. Set up your environment variables:
+
+```env
+BASE_URL=http://localhost:3000
+```
 
 ## API Endpoints
 
-### Users
+### Users Management
 
-#### Create User
+#### 1. Create User
 
-- **Method**: POST
-- **Endpoint**: `/api/users`
-- **Body**:
+- **Endpoint**: `POST /api/users`
+- **Description**: Register a new user in the system
+- **Request Body**:
 
 ```json
 {
   "name": "John Doe",
-  "email": "john.doe@example.com"
+  "email": "john@example.com",
+  "phone": "1234567890",
+  "password": "password123",
+  "role_id": 1
 }
 ```
 
-#### Get All Users
+#### 2. Get All Users
 
-- **Method**: GET
-- **Endpoint**: `/api/users`
+- **Endpoint**: `GET /api/users`
+- **Description**: Retrieve a list of all registered users
+- **Access**: Admin only
 
-### Products
+### Products Management
 
-#### Create Product
+#### 1. Create Product
 
-- **Method**: POST
-- **Endpoint**: `/api/products`
-- **Body**:
+- **Endpoint**: `POST /api/products`
+- **Description**: Add a new product to the system
+- **Request Body**:
 
 ```json
 {
-  "name": "Smartphone X",
-  "description": "Latest smartphone with amazing features",
+  "name": "iPhone 15 Pro",
+  "brand_id": 1,
+  "hsn_code_id": 1,
+  "description": "Latest iPhone model",
   "price": 999.99,
-  "image_url": "https://example.com/smartphone-x.jpg",
-  "stock": 50
+  "gst": 18.0,
+  "stock": 100,
+  "image_url": "http://example.com/iphone.jpg"
 }
 ```
 
-#### Get All Products
+#### 2. Get All Products
 
-- **Method**: GET
-- **Endpoint**: `/api/products`
+- **Endpoint**: `GET /api/products`
+- **Description**: Retrieve a list of all available products
 
-#### Get Product by ID
+### Wishlists Management
 
-- **Method**: GET
-- **Endpoint**: `/api/products/:id`
+#### 1. Create/Get Wishlist
 
-#### Update Product
-
-- **Method**: PUT
-- **Endpoint**: `/api/products/:id`
-- **Body**: Same as Create Product
-
-#### Delete Product
-
-- **Method**: DELETE
-- **Endpoint**: `/api/products/:id`
-
-### Wishlists
-
-#### Create or Get Wishlist
-
-- **Method**: POST
-- **Endpoint**: `/api/wishlists`
-- **Body**:
+- **Endpoint**: `POST /api/wishlists`
+- **Description**: Create a new wishlist for a user
+- **Request Body**:
 
 ```json
 {
   "user_id": 1,
-  "name": "My Custom Wishlist"
+  "name": "My Shopping List"
 }
 ```
 
-#### Get User's Wishlist
+#### 2. Get User's Wishlist
 
-- **Method**: GET
-- **Endpoint**: `/api/wishlists/user/:userId`
+- **Endpoint**: `GET /api/wishlists/user/{user_id}`
+- **Description**: Retrieve all wishlists belonging to a specific user
 
-### Collections
+### Collections Management
 
-#### Create Collection
+#### 1. Create Collection
 
-- **Method**: POST
-- **Endpoint**: `/api/wishlists/:wishlistId/collections`
-- **Body**:
+- **Endpoint**: `POST /api/collections`
+- **Description**: Create a new collection within a wishlist
+- **Request Body**:
 
 ```json
 {
-  "name": "Summer Collection"
+  "name": "Electronics",
+  "wishlist_id": 1,
+  "description": "My electronics wishlist"
 }
 ```
 
-#### Get Wishlist Collections
+#### 2. Get Wishlist Collections
 
-- **Method**: GET
-- **Endpoint**: `/api/wishlists/:wishlistId/collections`
+- **Endpoint**: `GET /api/wishlists/{wishlist_id}/collections`
+- **Description**: Retrieve all collections in a specific wishlist
 
-#### Update Collection
+### Collection Items Management
 
-- **Method**: PUT
-- **Endpoint**: `/api/collections/:id`
-- **Body**:
+#### 1. Add Item to Collection
+
+- **Endpoint**: `POST /api/collections/{collection_id}/items`
+- **Description**: Add a product to a specific collection
+- **Request Body**:
 
 ```json
 {
-  "name": "Updated Collection Name"
+  "product_id": 1
 }
 ```
 
-#### Delete Collection
+#### 2. Remove Item from Collection
 
-- **Method**: DELETE
-- **Endpoint**: `/api/collections/:id`
+- **Endpoint**: `DELETE /api/collections/{collection_id}/items/{item_id}`
+- **Description**: Remove a specific item from a collection
 
-### Collection Items
+## Data Flow Example
 
-#### Add Item to Collection
-
-- **Method**: POST
-- **Endpoint**: `/api/collections/:collectionId/items`
-- **Body**:
-
-```json
-{
-  "product_id": 123
-}
-```
-
-#### Remove Item from Collection
-
-- **Method**: DELETE
-- **Endpoint**: `/api/collections/:collectionId/items/:itemId`
-
-## Usage Examples
-
-### Complete Flow Example
-
-1. Create a User:
-
-```json
-POST /api/users
-{
-    "name": "John Doe",
-    "email": "john.doe@example.com"
-}
-```
-
-2. Create a Product:
-
-```json
-POST /api/products
-{
-    "name": "Smartphone X",
-    "description": "Latest smartphone with amazing features",
-    "price": 999.99,
-    "image_url": "https://example.com/smartphone-x.jpg",
-    "stock": 50
-}
-```
-
-3. Create a Wishlist for the User:
-
-```json
-POST /api/wishlists
-{
-    "user_id": 1,
-    "name": "My Tech Wishlist"
-}
-```
-
-4. Create a Collection in the Wishlist:
-
-```json
-POST /api/wishlists/1/collections
-{
-    "name": "Gadgets Collection"
-}
-```
-
-5. Add Product to Collection:
-
-```json
-POST /api/collections/1/items
-{
-    "product_id": 1
-}
-```
-
-## Response Examples
-
-### Successful User Creation
-
-```json
-{
-  "id": 1,
-  "name": "John Doe",
-  "email": "john.doe@example.com",
-  "created_at": "2025-01-12T10:00:00.000Z",
-  "updated_at": "2025-01-12T10:00:00.000Z"
-}
-```
-
-### Successful Wishlist Creation
-
-```json
-{
-  "id": 1,
-  "user_id": 1,
-  "name": "My Tech Wishlist",
-  "created_at": "2025-01-12T10:05:00.000Z",
-  "updated_at": "2025-01-12T10:05:00.000Z"
-}
-```
+1. Create a user (POST /api/users)
+2. Create a wishlist for the user (POST /api/wishlists)
+3. Create a collection in the wishlist (POST /api/collections)
+4. Add items to the collection (POST /api/collections/{id}/items)
+5. View all collections in wishlist (GET /api/wishlists/{id}/collections)
 
 ## Error Handling
 
-The API returns appropriate HTTP status codes:
+The API returns standard HTTP status codes:
 
 - 200: Success
 - 201: Created
 - 400: Bad Request
+- 401: Unauthorized
+- 403: Forbidden
 - 404: Not Found
 - 500: Server Error
 
-Error responses include a message:
+## Testing
 
-```json
-{
-  "message": "Error description here"
-}
-```
+1. Use the provided Postman collection for testing all endpoints
+2. Make sure to first populate the database using the SQL scripts provided
+3. Test endpoints in the sequence mentioned in the Data Flow Example
