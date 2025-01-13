@@ -1,11 +1,7 @@
 import React from "react";
 import { Box, Button, List, ListItem, Paper } from "@mui/material";
-import ThumbDownOutlinedIcon from "@mui/icons-material/ThumbDownOutlined";
-import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
-import FeedbackOutlinedIcon from "@mui/icons-material/FeedbackOutlined";
 import BlockOutlinedIcon from "@mui/icons-material/BlockOutlined";
 import CallMadeIcon from "@mui/icons-material/CallMade";
-import { isCancel } from "axios";
 
 const HelpOptions = ({
   isDelivered,

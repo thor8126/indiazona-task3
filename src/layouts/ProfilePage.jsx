@@ -4,23 +4,10 @@ import { Navigate, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Drawer from "@mui/material/Drawer";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import {
-  Person,
-  ShoppingBag,
-  Favorite,
-  LocationOn,
-  Logout,
-  DeleteOutline,
-  Menu as MenuIcon,
-} from "@mui/icons-material";
+import { Menu as MenuIcon } from "@mui/icons-material";
 import {
   Dialog,
   DialogTitle,
@@ -33,26 +20,16 @@ import {
 } from "@mui/material";
 import { Close as CloseIcon } from "@mui/icons-material";
 
-import PersonalInfo from "../pages/PersonalInfo/PersonalInfo";
-import Wishlist from "../pages/WishList/WishList";
-import MyAddresses from "../pages/ManageAddresses/MyAddresses";
 import image1 from "../assets/wishlist1.png";
 import image2 from "../assets/wishlist2.png";
 import image3 from "../assets/wishlist3.png";
 import image4 from "../assets/wishlist4.png";
 import image5 from "../assets/wishlist5.png";
+import PersonalInfo from "../components/PersonalInfo/PersonalInfo";
+import Wishlist from "../components/WishList/WishList";
+import MyAddresses from "../components/ManageAddresses/MyAddresses";
 import ProfileSidebar from "../components/commonComp/ProfileSidebar";
 
-const iconMap = {
-  Person: <Person />,
-  ShoppingBag: <ShoppingBag />,
-  Favorite: <Favorite />,
-  LocationOn: <LocationOn />,
-  Logout: <Logout />,
-  DeleteOutline: <DeleteOutline />,
-};
-
-// Sample address data for my addresses
 const addresses = [
   {
     id: "7667434402",
@@ -287,7 +264,6 @@ const Root = ({ navItems, user }) => {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-
   const handleNavigation = (navItem) => {
     if (navItem.path) {
       navigate(navItem.path);

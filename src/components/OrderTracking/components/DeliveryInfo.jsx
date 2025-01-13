@@ -7,9 +7,6 @@ import {
   useTheme,
   useMediaQuery,
 } from "@mui/material";
-import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
-import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
-import AssignmentReturnIcon from "@mui/icons-material/AssignmentReturn";
 import HelpOptions from "./HelpOptions"; // Import the HelpOptions component
 
 export default function DeliveryInfo({

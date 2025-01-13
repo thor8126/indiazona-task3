@@ -7,7 +7,7 @@ import {
   useTheme,
   useMediaQuery,
 } from "@mui/material";
-import HelpOptions from "./HelpOptions"; // Import the HelpOptions component
+import HelpOptions from "./HelpOptions";
 
 export default function DeliveryInfo({
   deliveryInfo,

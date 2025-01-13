@@ -2,18 +2,19 @@ import { Route, Routes } from "react-router-dom";
 
 import Test from "./pages/Test/Test";
 import AdminLayout from "./layouts/AdminLayout";
-import OrderTracking from "./pages/OrderTracking/Root";
 import { Navigate } from "react-router-dom";
-import ProfileSettings from "./layouts/ProfilePage";
 
 import avatar from "./assets/avatar.png";
-import MyOrder from "./pages/MyOrders/MyOrders";
-import ViewOrder from "./pages/ViewOrder/Root";
-
 import img1 from "./assets/order1.png";
 import img2 from "./assets/order2.png";
 import img3 from "./assets/order3.png";
 import img4 from "./assets/order4.png";
+
+import MyOrder from "./components/MyOrders/MyOrders";
+import ProfileSettings from "./layouts/ProfilePage";
+import OrderTracking from "./components/OrderTracking/Root";
+import ViewOrder from "./components/ViewOrder/Root";
+
 const user = {
   fullName: "Siddhi Borekar",
   mobileNumber: "+91 9876543210",
