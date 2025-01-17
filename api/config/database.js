@@ -1,28 +1,18 @@
 const { Sequelize } = require("sequelize");
 
-// Create a Sequelize instance and configure the connection
-const sequelize = new Sequelize({
-  dialect: "mysql", // Using MySQL
-  host: "localhost", // Your MySQL host, usually localhost
-  username: "root", // Your MySQL username
-  password: "admin", // Your MySQL password
-  database: "wishlist_db", // Your MySQL database name
-  logging: false, // Disable logging SQL queries to console
-  define: {
-    timestamps: true, // Automatically add createdAt and updatedAt fields
-    underscored: true, // Use snake_case for column names in DB
-  },
-});
-
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log(
-      "Connection to the database has been established successfully."
-    );
-  })
-  .catch((err) => {
-    console.error("Unable to connect to the database:", err);
-  });
+const sequelize = new Sequelize(
+  process.env.DB_NAME,
+  process.env.DB_USER || "root",
+  process.env.DB_PASS || "admin",
+  {
+    host: process.env.DB_HOST || "localhost",
+    dialect: "mysql",
+    logging: false,
+    define: {
+      timestamps: true,
+      underscored: true,
+    },
+  }
+);
 
 module.exports = sequelize;
