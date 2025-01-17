@@ -4,7 +4,7 @@ const {
   Product,
   Brand,
   HSNCode,
-} = require("../models");
+} = require("../../models");
 
 exports.createCollection = async (req, res) => {
   try {

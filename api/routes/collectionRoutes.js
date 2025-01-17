@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const collectionController = require("../controllers/collectionController");
+const collectionController = require("../controllers/app/collectionController");
 
 router.post("/", collectionController.createCollection);
 router.get(
@@ -11,7 +11,6 @@ router.post("/:collectionId/items", collectionController.addCollectionItem);
 router.delete(
   "/:collectionId/items/:productId",
   collectionController.removeCollectionItem
-); 
-
+);
 
 module.exports = router;

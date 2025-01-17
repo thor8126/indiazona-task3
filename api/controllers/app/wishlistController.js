@@ -1,4 +1,10 @@
-const { Wishlist, Collection, Product, Brand, HSNCode } = require("../models");
+const {
+  Wishlist,
+  Collection,
+  Product,
+  Brand,
+  HSNCode,
+} = require("../../models");
 
 exports.createWishlist = async (req, res) => {
   try {
