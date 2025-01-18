@@ -3,7 +3,6 @@ const sequelize = require("../config/database");
 const User = require("./User");
 // const Items = require("./Item");
 const Brands = require("./Brands");
-const HsnCodes = require("./HSNCode");
 
 const Product = sequelize.define(
   "Product",
