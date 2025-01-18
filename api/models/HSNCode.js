@@ -1,7 +1,11 @@
-const { DataTypes } = require("sequelize");
+const { DataTypes, Model } = require("sequelize");
+const sequelize = require("../config/database");
+const Brands = require("./Brands");
 
-module.exports = (sequelize) => {
-  return sequelize.define("hsn_codes", {
+class HsnCodes extends Model {}
+
+HsnCodes.init(
+  {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -15,5 +19,19 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
       allowNull: true,
     },
-  });
-};
+  },
+  {
+    sequelize,
+    modelName: "HsnCodes",
+    tableName: "hsn_codes",
+    timestamps: true,
+    createdAt: "created_at",
+    updatedAt: "updated_at",
+  }
+);
+
+// Define associations
+HsnCodes.belongsTo(Brands, { foreignKey: "brand_id" });
+Brands.hasMany(HsnCodes, { foreignKey: "brand_id" });
+
+module.exports = HsnCodes;

@@ -1,49 +1,40 @@
-const { Sequelize } = require("sequelize");
-require("dotenv").config();
+// Import Sequelize instance
+const sequelize = require("../config/database");
 
-const sequelize = new Sequelize(
-  process.env.DB_NAME,
-  process.env.DB_USER || "root",
-  process.env.DB_PASS || "admin",
-  {
-    host: process.env.DB_HOST || "localhost",
-    dialect: "mysql",
-    logging: false,
-    define: {
-      timestamps: true,
-      underscored: true,
-    },
-  }
-);
+// Import models
+const User = require("./User");
+const Product = require("./Product");
+const HSNCodes = require("./HSNCode");
+const Brands = require("./Brands");
+const Wishlist = require("./Wishlist");
+const Collection = require("./Collection");
+const CollectionItem = require("./CollectionItem");
+const UserRoles = require("./UserRole");
 
-const UserRole = require("./UserRole")(sequelize);
-const User = require("./User")(sequelize);
-const HSNCode = require("./HSNCode")(sequelize);
-const Brand = require("./Brand")(sequelize);
-const Product = require("./Product")(sequelize);
-const Wishlist = require("./Wishlist")(sequelize);
-const Collection = require("./Collection")(sequelize);
-const CollectionItem = require("./CollectionItem")(sequelize);
+// User and UserRoles
+UserRoles.hasMany(User, { foreignKey: "role_id" });
+User.belongsTo(UserRoles, { foreignKey: "role_id" });
 
-// Define Relationships
-UserRole.hasMany(User, { foreignKey: "role_id" });
-User.belongsTo(UserRole, { foreignKey: "role_id" });
+// Product and Brands
+Brands.hasMany(Product, { foreignKey: "brand_id" });
+Product.belongsTo(Brands, { foreignKey: "brand_id" });
 
-Brand.hasMany(Product, { foreignKey: "brand_id" });
-Product.belongsTo(Brand, { foreignKey: "brand_id" });
+// Product and HSNCodes
+HSNCodes.hasMany(Product, { foreignKey: "hsn_code_id" });
+Product.belongsTo(HSNCodes, { foreignKey: "hsn_code_id" });
 
-HSNCode.hasMany(Product, { foreignKey: "hsn_code_id" });
-Product.belongsTo(HSNCode, { foreignKey: "hsn_code_id" });
-
+// Wishlist and User
 User.hasOne(Wishlist, { foreignKey: "user_id", onDelete: "CASCADE" });
 Wishlist.belongsTo(User, { foreignKey: "user_id" });
 
+// Wishlist and Collection
 Wishlist.hasMany(Collection, {
   foreignKey: "wishlist_id",
   onDelete: "CASCADE",
 });
 Collection.belongsTo(Wishlist, { foreignKey: "wishlist_id" });
 
+// Collection and Product (Many-to-Many)
 Collection.belongsToMany(Product, {
   through: CollectionItem,
   foreignKey: "collection_id",
@@ -53,14 +44,15 @@ Product.belongsToMany(Collection, {
   foreignKey: "product_id",
 });
 
+// Export models and Sequelize instance
 module.exports = {
   sequelize,
-  UserRole,
   User,
-  HSNCode,
-  Brand,
   Product,
+  HSNCodes,
+  Brands,
   Wishlist,
   Collection,
   CollectionItem,
+  UserRoles,
 };

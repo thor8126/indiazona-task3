@@ -1,7 +1,10 @@
-const { DataTypes } = require("sequelize");
+const { DataTypes, Model } = require("sequelize");
+const sequelize = require("../config/database");
 
-module.exports = (sequelize) => {
-  return sequelize.define("collections", {
+class Collection extends Model {}
+
+Collection.init(
+  {
     id: {
       type: DataTypes.INTEGER.UNSIGNED,
       primaryKey: true,
@@ -19,5 +22,15 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
       allowNull: true,
     },
-  });
-};
+  },
+  {
+    sequelize,
+    modelName: "Collection",
+    tableName: "collections",
+    timestamps: true,
+    createdAt: "created_at",
+    updatedAt: "updated_at",
+  }
+);
+
+module.exports = Collection;

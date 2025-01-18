@@ -2,8 +2,8 @@ const {
   Wishlist,
   Collection,
   Product,
-  Brand,
-  HSNCode,
+  Brands,
+  HSNCodes,
 } = require("../../models");
 
 exports.createWishlist = async (req, res) => {
@@ -29,17 +29,19 @@ exports.getUserWishlist = async (req, res) => {
           include: [
             {
               model: Product,
-              include: [Brand, HSNCode],
+              include: [{ model: Brands }, { model: HSNCodes }],
             },
           ],
         },
       ],
     });
+
     if (!wishlist) {
       return res.status(404).json({ message: "Wishlist not found" });
     }
     res.json(wishlist);
   } catch (error) {
+    console.error("Detailed error:", error);
     res.status(500).json({ message: error.message });
   }
 };

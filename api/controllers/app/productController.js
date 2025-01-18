@@ -1,4 +1,4 @@
-const { Product, Brand, HSNCode } = require("../../models");
+const { Product, HSNCode, Brands } = require("../../models");
 
 exports.createProduct = async (req, res) => {
   try {
@@ -12,7 +12,7 @@ exports.createProduct = async (req, res) => {
 exports.getProducts = async (req, res) => {
   try {
     const products = await Product.findAll({
-      include: [Brand, HSNCode],
+      include: [Brands, HSNCode],
     });
     res.json(products);
   } catch (error) {
