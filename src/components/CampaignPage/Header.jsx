@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Form from "./Form";
 import {
   Box,
@@ -14,9 +14,26 @@ function Header() {
   const [modalOpen, setModalOpen] = useState(false);
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
+  const formRef = useRef();
 
   const handleModalToggle = () => {
     setModalOpen(!modalOpen);
+  };
+
+  const handleRegister = async () => {
+    if (isSmallScreen) {
+      handleModalToggle();
+    } else {
+      if (formRef.current) {
+        await formRef.current.submitForm();
+      }
+    }
+  };
+
+  const handleModalRegister = async () => {
+    if (formRef.current && (await formRef.current.submitForm())) {
+      handleModalToggle();
+    }
   };
 
   return (
@@ -78,7 +95,7 @@ function Header() {
             <Box sx={{ display: "flex", gap: 2 }}>
               <Button
                 variant="contained"
-                onClick={isSmallScreen ? handleModalToggle : undefined}
+                onClick={handleRegister}
                 sx={{
                   bgcolor: "#455F76",
                   "&:hover": {
@@ -183,7 +200,7 @@ function Header() {
               </svg>
             </Typography>
             {/* Form Component */}
-            <Form />
+            <Form ref={formRef} />
           </Box>
         </Grid>
       </Grid>
@@ -217,33 +234,35 @@ function Header() {
           >
             Register Now for Free
           </Typography>
-          <Form />
-          <Button
-            onClick={handleModalToggle}
-            sx={{
-              mt: 2,
-              bgcolor: "#455F76",
-              color: "white",
-              "&:hover": {
-                bgcolor: "#374556",
-              },
-            }}
-          >
-            Close
-          </Button>
-
-          <Button
-            sx={{
-              mt: 2,
-              bgcolor: "#FF944E",
-              color: "white",
-              "&:hover": {
+          <Form ref={formRef} />
+          <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <Button
+              onClick={handleModalRegister}
+              sx={{
+                mt: 2,
                 bgcolor: "#FF944E",
-              },
-            }}
-          >
-            Register
-          </Button>
+                color: "white",
+                "&:hover": {
+                  bgcolor: "#FF944E",
+                },
+              }}
+            >
+              Register
+            </Button>{" "}
+            <Button
+              onClick={handleModalToggle}
+              sx={{
+                mt: 2,
+                bgcolor: "#455F76",
+                color: "white",
+                "&:hover": {
+                  bgcolor: "#374556",
+                },
+              }}
+            >
+              Close
+            </Button>
+          </Box>
         </Box>
       </Modal>
     </Box>

@@ -7,6 +7,7 @@ const userRoutes = require("./routes/userRoutes");
 const productRoutes = require("./routes/productRoutes");
 const wishlistRoutes = require("./routes/wishlistRoutes");
 const collectionRoutes = require("./routes/collectionRoutes");
+const campaignRoutes = require("./routes/campaign");
 
 const app = express();
 
@@ -20,7 +21,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/wishlists", wishlistRoutes);
 app.use("/api/collections", collectionRoutes);
-
+app.use("/api/campaign", campaignRoutes);
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);

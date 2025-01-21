@@ -11,6 +11,9 @@ const Collection = require("./Collection");
 const CollectionItem = require("./CollectionItem");
 const UserRoles = require("./UserRole");
 
+// Campaign api models
+const CampaignForm = require("./CampaignForm");
+
 // User and UserRoles
 UserRoles.hasMany(User, { foreignKey: "role_id" });
 User.belongsTo(UserRoles, { foreignKey: "role_id" });
@@ -55,4 +58,5 @@ module.exports = {
   Collection,
   CollectionItem,
   UserRoles,
+  CampaignForm,
 };
