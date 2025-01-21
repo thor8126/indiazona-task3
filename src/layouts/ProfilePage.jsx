@@ -25,6 +25,7 @@ import image2 from "../assets/wishlist2.png";
 import image3 from "../assets/wishlist3.png";
 import image4 from "../assets/wishlist4.png";
 import image5 from "../assets/wishlist5.png";
+import avatar from "../assets/avatar.png";
 import PersonalInfo from "../components/PersonalInfo/PersonalInfo";
 import Wishlist from "../components/WishList/WishList";
 import MyAddresses from "../components/ManageAddresses/MyAddresses";
@@ -245,7 +246,38 @@ const DeleteAccountDialog = ({ open, onClose }) => {
     </Dialog>
   );
 };
-const Root = ({ navItems, user }) => {
+const user = {
+  fullName: "Siddhi Borekar",
+  mobileNumber: "+91 9876543210",
+  email: "sidborekar05@gmail.com",
+  birthDate: "08/06/2004",
+  password: "password123",
+  avatar: avatar,
+  notifications: false,
+};
+const navItems = [
+  {
+    id: "personal-info",
+    icon: "Person",
+    label: "Personal Information",
+  },
+  {
+    id: "wishlist",
+    icon: "Favorite",
+    label: "My Wishlist",
+  },
+  {
+    id: "myorders",
+    icon: "ShoppingBag",
+    label: "My Orders",
+  },
+  {
+    id: "myaddresses",
+    icon: "LocationOn",
+    label: "My Addresses",
+  },
+];
+const Root = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);

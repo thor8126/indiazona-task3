@@ -26,7 +26,6 @@ const OrderTracking = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [isCancelledModalOpen, setIsCancelledModalOpen] = React.useState(false);
-
   const [isCancelled, setIsCancelled] = useState(false);
   const [isDelivered, setIsDelivered] = useState(true);
 
