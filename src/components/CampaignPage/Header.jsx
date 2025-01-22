@@ -21,7 +21,7 @@ function Header({ aboutCampaignRef }) {
 
   const handleRegister = async () => {
     if (isMobile && formContainerRef.current) {
-      const yOffset = -50; // Smaller offset for form scroll
+      const yOffset = -70; // Smaller offset for form scroll
       const element = formContainerRef.current;
       const y =
         element.getBoundingClientRect().top + window.pageYOffset + yOffset;
