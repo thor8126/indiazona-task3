@@ -1,0 +1,58 @@
+{
+    "info": {
+        "name": "CampaignForm API",
+        "description": "Postman collection for the CampaignForm controller.",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Register Campaign",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"johndoe@example.com\",\n  \"mobile\": \"9876543210\",\n  \"business_type\": \"Existing Entrepreneur Aiming to Scale Up\",\n  \"description\": \"Looking to expand business operations.\"\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:3000/api/register",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3000",
+                    "path": [
+                        "api",
+                        "register"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Get All Registrations",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:3000/api/registrations",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3000",
+                    "path": [
+                        "api",
+                        "registrations"
+                    ]
+                }
+            },
+            "response": []
+        }
+    ]
+}
