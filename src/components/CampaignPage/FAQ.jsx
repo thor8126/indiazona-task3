@@ -22,48 +22,48 @@ const faqData = [
   {
     question: "What are the charges to join it?",
     answer:
-      "We offer competitive rates tailored to your needs. Contact us for detailed pricing information.",
-  },
-  {
-    question: "How can I get started?",
-    answer:
-      "Getting started is easy! Simply register through our platform and follow the guided steps.",
-  },
-  {
-    question: "How do I register?",
-    answer:
-      "Registration can be completed through our online portal in just a few minutes.",
-  },
-  {
-    question: "Do I need to attend the webinar to get personalized guidance?",
-    answer:
-      "While recommended, webinar attendance is not mandatory. You can access recorded sessions.",
+      "It is totally FREE to register and become a part of this campaign.",
   },
   {
     question: "When will this happen?",
     answer:
-      "Events and programs are scheduled regularly. Check our calendar for upcoming dates.",
+      "Events and programs are scheduled regularly. You will be notified via mail for all the updates.",
   },
   {
     question: "What kind of support will I receive?",
     answer:
-      "We provide comprehensive support including technical assistance and mentoring.",
+      "You will receive personalized guidance tailored to your business needs, from experts in the industry, including resources, marketing support, and visibility on Indiazona.",
   },
   {
     question: "Will I receive one-on-one mentoring?",
     answer:
-      "Yes, one-on-one mentoring sessions are available as part of our program.",
+      "Yes, you will have access to personalized one-on-one mentoring and consultations, helping you at every step of your business journey.",
+  },
+  {
+    question: "How can I get started?",
+    answer:
+      "Simply register for the campaign through our website, fill out the form, and attend the introductory webinar to kickstart your journey.",
   },
   {
     question:
       "Do I already need to have a business or is the campaign limited to any specific type of business?",
     answer:
-      "Our program is open to both existing businesses and new entrepreneurs.",
+      "No, you don’t need a business already. The campaign is open to anyone who wants to start or grow a business, regardless of the type or stage.",
   },
   {
-    question: "Can I join if I don't have a business idea yet?",
+    question: "How do I register?",
     answer:
-      "Yes, we welcome participants at all stages, including those still developing their ideas.",
+      "You can register by visiting the Indiazona website or through the campaign registration link available on our social media platforms.",
+  },
+  {
+    question: "Can I join if I don’t have a business idea yet?",
+    answer:
+      "Absolutely! If you’re exploring business ideas, you can still join and get guidance on how to start and shape your vision.",
+  },
+  {
+    question: "Do I need to attend the webinar to get personalized guidance?",
+    answer:
+      "Yes, attending the webinar is crucial to receiving personalized guidance and support. It’s your first step to start receiving tailored advice.",
   },
 ];
 
