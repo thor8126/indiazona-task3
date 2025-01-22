@@ -14,11 +14,10 @@ const Campaign = () => {
       <Container
         maxWidth
         sx={{
-          py: 7,
+          py: { xs: 2, sm: 4, md: 6.5 },
           px: { xs: 2, sm: 4, md: 6.5 },
         }}
       >
-        <br />
         <br />
         {/*  AboutCampaign Component */}
         <AboutCampaign />

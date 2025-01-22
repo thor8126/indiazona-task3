@@ -1,38 +1,13 @@
 import React, { useRef, useState } from "react";
 import Form from "./Form";
-import {
-  Box,
-  Typography,
-  Button,
-  Grid,
-  Modal,
-  useMediaQuery,
-} from "@mui/material";
-import { useTheme } from "@mui/material/styles";
+import { Box, Typography, Button, Grid } from "@mui/material";
 
 function Header() {
-  const [modalOpen, setModalOpen] = useState(false);
-  const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
   const formRef = useRef();
 
-  const handleModalToggle = () => {
-    setModalOpen(!modalOpen);
-  };
-
   const handleRegister = async () => {
-    if (isSmallScreen) {
-      handleModalToggle();
-    } else {
-      if (formRef.current) {
-        await formRef.current.submitForm();
-      }
-    }
-  };
-
-  const handleModalRegister = async () => {
-    if (formRef.current && (await formRef.current.submitForm())) {
-      handleModalToggle();
+    if (formRef.current) {
+      await formRef.current.submitForm();
     }
   };
 
@@ -40,59 +15,107 @@ function Header() {
     <Box
       sx={{
         background: "linear-gradient(to bottom, #E9F5FF, #FFFDF8)",
-        padding: 6,
+        padding: { xs: "40px 20px", md: 8 },
         paddingBottom: 0,
       }}
     >
       <Grid
         container
-        spacing={1.8}
+        spacing={1}
         sx={{
           justifyContent: "space-between",
           alignItems: "flex-start",
         }}
       >
         {/* Left section */}
-        <Grid item xs={12} md={7.7}>
-          <Box sx={{ mb: { xs: 4, md: 0 }, py: 5.5 }}>
-            <Box sx={{ maxWidth: "85%" }}>
-              <Typography
-                sx={{
-                  color: "#445469",
-                  fontWeight: 700,
-                  fontSize: { xs: "30px", md: "61px" },
-                  lineHeight: { xs: "34px", md: "92px" },
-                  fontFamily: "Mukta Mahee !important",
-                }}
-              >
-                आपकी दुकान,
-              </Typography>
-              <Typography
-                sx={{
+        <Grid item xs={12} md={8}>
+          <Box sx={{ py: 5 }}>
+            {/* Hindi Title */}
+            <Typography
+              sx={{
+                color: "#445469",
+                fontWeight: 700,
+                fontSize: { xs: "1.8rem", sm: "2rem", md: "2.5rem" },
+                lineHeight: { xs: "46px", md: "76px" },
+                fontFamily: "Mukta Mahee, sans-serif",
+                minWidth: "100%",
+                textAlign: { xs: "center", md: "left" },
+                wordWrap: "break-word",
+              }}
+            >
+              आपकी दुकान,{""}
+              <span
+                style={{
                   color: "#FF944E",
                   fontWeight: 700,
-                  fontSize: { xs: "30px", md: "71px" },
-                  lineHeight: { xs: "34px", md: "92px" },
-                  fontFamily: "Mukta Mahee !important",
+                  fontSize: { xs: "1.8rem", sm: "2rem", md: "2.5rem" },
+                  lineHeight: { xs: "46px", md: "76px" },
+                  fontFamily: "Mukta Mahee, sans-serif",
                 }}
               >
+                {" "}
                 आपकी पहचान
-              </Typography>
+              </span>
+            </Typography>
 
-              <Typography
+            {/* English Title */}
+            <Typography
+              sx={{
+                color: "#445469",
+                fontWeight: 700,
+                fontSize: { xs: "1.8rem", sm: "2rem", md: "2.5rem" },
+                lineHeight: { xs: "56px", md: "74px" },
+                mb: 2,
+                textAlign: { xs: "center", md: "left" },
+              }}
+            >
+              Empowering Women to{" "}
+              <Box
+                component="span"
                 sx={{
-                  color: "#445469",
-                  mt: 3,
-                  mb: 3,
-                  fontWeight: "400",
-                  fontSize: { xs: "16px", md: "24px" },
+                  color: "#FF944E",
+                  lineHeight: { xs: "44px", md: "74px" },
                 }}
               >
-                Because every woman deserves her own identity and independence.
-              </Typography>
-            </Box>
+                Build Their Identity
+              </Box>
+            </Typography>
 
-            <Box sx={{ display: "flex", gap: 2 }}>
+            {/* Description */}
+            <Typography
+              sx={{
+                color: "#445469",
+                fontWeight: 500,
+                fontSize: { xs: "16px", md: "24px" },
+                lineHeight: { xs: "24px", md: "42px" },
+                maxWidth: { xs: "100%", md: "90%" },
+                mb: 3,
+                textAlign: { xs: "center", md: "left" },
+              }}
+            >
+              At Indiazona, we believe every woman deserves the right to
+              independence and the freedom to grow her business.{" "}
+              <Box
+                component="span"
+                sx={{
+                  fontWeight: 600,
+                  color: "#FF944E",
+                }}
+              >
+                Join us in celebrating your talent and creating your own
+                identity.
+              </Box>
+            </Typography>
+
+            {/* Buttons */}
+            <Box
+              sx={{
+                display: "flex",
+                gap: 1,
+                mb: 3,
+                justifyContent: { xs: "center", md: "flex-start" },
+              }}
+            >
               <Button
                 variant="contained"
                 onClick={handleRegister}
@@ -102,16 +125,15 @@ function Header() {
                     bgcolor: "#374556",
                   },
                   textTransform: "none",
-                  px: { xs: 2, md: 4 },
-                  py: { xs: 1, md: 1.6 },
-                  width: { xs: "70%", sm: "286px", md: "286px" },
-                  height: { xs: "48px", md: "56px" },
-                  borderRadius: "5px",
+                  px: { xs: 3, md: 4 },
+                  py: { xs: 1.5, md: 2 },
+                  minWidth: { xs: "140px", md: "230px" },
+                  borderRadius: "4px",
+                  fontSize: "16px",
                 }}
               >
-                Register for the Webinar
+                Get Started Today
               </Button>
-
               <Button
                 variant="outlined"
                 sx={{
@@ -122,26 +144,44 @@ function Header() {
                     bgcolor: "rgba(68, 84, 105, 0.04)",
                   },
                   textTransform: "none",
-                  px: { xs: 2, md: 4 },
-                  py: { xs: 1, md: 1.6 },
-                  height: { xs: "48px", md: "56px" },
-                  width: { xs: "30%", sm: "286px", md: "286px" },
-                  borderRadius: "5px",
+                  px: { xs: 3, md: 4 },
+                  py: { xs: 1.5, md: 2 },
+                  minWidth: "140px",
+                  borderRadius: "4px",
+                  fontSize: "16px",
                 }}
               >
                 Learn More
               </Button>
             </Box>
+
+            {/* Footer Text */}
+            <Typography
+              sx={{
+                color: "#445469",
+                fontWeight: 400,
+                fontSize: { xs: "14px", md: "20px" },
+                lineHeight: { xs: "20px", md: "42px" },
+                textAlign: { xs: "center", md: "left" },
+              }}
+            >
+              Because every woman deserves{" "}
+              <Box
+                component="span"
+                sx={{
+                  fontWeight: 500,
+                  color: "#FF944E",
+                  display: { xs: "block", md: "inline" },
+                }}
+              >
+                her own identity and independence.
+              </Box>
+            </Typography>
           </Box>
         </Grid>
 
         {/* Right section  */}
-        <Grid
-          item
-          xs={12}
-          md={4.2}
-          sx={{ display: { xs: "none", md: "block" } }}
-        >
+        <Grid item xs={12} md={4}>
           <Box
             sx={{
               backgroundColor: "#FFFFFF",
@@ -164,7 +204,7 @@ function Header() {
                 },
               }}
             >
-              <Box>
+              <Box sx={{ mb: 1 }}>
                 <span
                   style={{
                     fontWeight: "600",
@@ -204,67 +244,6 @@ function Header() {
           </Box>
         </Grid>
       </Grid>
-
-      {/* Modal for small screens */}
-      <Modal
-        open={modalOpen && isSmallScreen}
-        onClose={handleModalToggle}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: "90%",
-            maxWidth: 400,
-            bgcolor: "background.paper",
-            boxShadow: 24,
-            p: 4,
-            borderRadius: 2,
-          }}
-        >
-          <Typography
-            id="modal-modal-title"
-            variant="h6"
-            component="h2"
-            sx={{ mb: 2 }}
-          >
-            Register Now for Free
-          </Typography>
-          <Form ref={formRef} />
-          <Box sx={{ display: "flex", flexDirection: "column" }}>
-            <Button
-              onClick={handleModalRegister}
-              sx={{
-                mt: 2,
-                bgcolor: "#FF944E",
-                color: "white",
-                "&:hover": {
-                  bgcolor: "#FF944E",
-                },
-              }}
-            >
-              Register
-            </Button>{" "}
-            <Button
-              onClick={handleModalToggle}
-              sx={{
-                mt: 2,
-                bgcolor: "#455F76",
-                color: "white",
-                "&:hover": {
-                  bgcolor: "#374556",
-                },
-              }}
-            >
-              Close
-            </Button>
-          </Box>
-        </Box>
-      </Modal>
     </Box>
   );
 }

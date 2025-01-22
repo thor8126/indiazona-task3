@@ -39,7 +39,7 @@ const StyledInputLabel = styled(InputLabel)({
   fontSize: "14px",
   fontWeight: 500,
   color: "black",
-  marginBottom: "-4px",
+  marginBottom: "5px",
 });
 
 const Form = forwardRef((props, ref) => {

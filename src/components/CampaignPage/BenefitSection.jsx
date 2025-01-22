@@ -1,20 +1,23 @@
 import React from "react";
 import { Box, Typography, Paper } from "@mui/material";
-import icon1 from "../../assets/campaignicon5.png";
-import icon2 from "../../assets/campaignicon6.png";
-import icon3 from "../../assets/campaignicon7.png";
-import icon4 from "../../assets/campaignicon8.png";
-import icon5 from "../../assets/campaignicon9.png";
+
+import icon5 from "../../assets/campaignicon5.png";
+import icon6 from "../../assets/campaignicon6.png";
+import icon7 from "../../assets/campaignicon7.png";
+import icon8 from "../../assets/campaignicon8.png";
+import icon9 from "../../assets/campaignicon9.png";
+import icon10 from "../../assets/campaignicon10.png";
+import icon11 from "../../assets/campaignicon11.png";
 
 const BenefitSection = () => {
   const benefits = [
-    { icon: icon1, title: "Start your business with Indiazona's support." },
-    { icon: icon2, title: "Zero consulting fees for personalised guidance." },
-    { icon: icon3, title: "End-to-end support tailored to your needs." },
-    { icon: icon4, title: "Free onboarding and visibility on Indiazona." },
-    { icon: icon5, title: "Access to resources for business growth." },
-    { icon: icon4, title: "Get expert advice to grow your brand." },
-    { icon: icon5, title: "No hidden fees—just growth and success." },
+    { icon: icon5, title: "Start your business with Indiazona's support." },
+    { icon: icon6, title: "Zero consulting fees for personalised guidance." },
+    { icon: icon7, title: "End-to-end support tailored to your needs." },
+    { icon: icon8, title: "Free onboarding and visibility on Indiazona." },
+    { icon: icon9, title: "No hidden fees—just growth and success." },
+    { icon: icon10, title: "Get expert advice to grow your brand." },
+    { icon: icon11, title: "Access to resources for business growth." },
   ];
 
   const BenefitItem = ({ benefit, index }) => (
