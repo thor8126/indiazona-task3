@@ -7,7 +7,6 @@ function Header({ aboutCampaignRef }) {
   const formContainerRef = useRef();
   const isMobile = useMediaQuery("(max-width:900px)");
 
-  // In Header component
   const handleLearnMore = () => {
     if (aboutCampaignRef?.current) {
       const yOffset = -100; // Adjust this value to control how far from the top
