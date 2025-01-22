@@ -1,5 +1,5 @@
-import React from "react";
-import { Container } from "@mui/material";
+import React, { useRef } from "react";
+import { Box, Container } from "@mui/material";
 
 import AboutCampaign from "./AboutCampaign";
 import BenefitSection from "./BenefitSection";
@@ -8,9 +8,10 @@ import FAQ from "./FAQ";
 import Header from "./Header";
 
 const Campaign = () => {
+  const aboutCampaignRef = useRef();
   return (
     <>
-      <Header />
+      <Header aboutCampaignRef={aboutCampaignRef} />
       <Container
         maxWidth
         sx={{
@@ -20,7 +21,9 @@ const Campaign = () => {
       >
         <br />
         {/*  AboutCampaign Component */}
-        <AboutCampaign />
+        <Box ref={aboutCampaignRef}>
+          <AboutCampaign />
+        </Box>
 
         <br />
         {/* BenefitSection Component */}

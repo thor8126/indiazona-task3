@@ -207,6 +207,14 @@ const Form = forwardRef((props, ref) => {
         error={!!errors.business_type}
         helperText={errors.business_type}
         SelectProps={{
+          MenuProps: {
+            PaperProps: {
+              style: {
+                maxHeight: "50vh",
+                maxWidth: "90vw",
+              },
+            },
+          },
           displayEmpty: true,
           renderValue: (value) =>
             value === "" ? (
@@ -217,7 +225,16 @@ const Form = forwardRef((props, ref) => {
         }}
       >
         {businessTypes.map((option) => (
-          <MenuItem key={option} value={option}>
+          <MenuItem
+            key={option}
+            value={option}
+            style={{
+              whiteSpace: "normal",
+              wordBreak: "break-word",
+              minHeight: window.innerWidth <= 600 ? "40px" : "48px",
+              fontSize: window.innerWidth <= 600 ? "0.875rem" : "1rem",
+            }}
+          >
             {option}
           </MenuItem>
         ))}

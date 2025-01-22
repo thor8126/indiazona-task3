@@ -1,12 +1,33 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import Form from "./Form";
-import { Box, Typography, Button, Grid } from "@mui/material";
+import { Box, Typography, Button, Grid, useMediaQuery } from "@mui/material";
 
-function Header() {
+function Header({ aboutCampaignRef }) {
   const formRef = useRef();
+  const formContainerRef = useRef();
+  const isMobile = useMediaQuery("(max-width:900px)");
+
+  // In Header component
+  const handleLearnMore = () => {
+    if (aboutCampaignRef?.current) {
+      const yOffset = -100; // Adjust this value to control how far from the top
+      const element = aboutCampaignRef.current;
+      const y =
+        element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
 
   const handleRegister = async () => {
-    if (formRef.current) {
+    if (isMobile && formContainerRef.current) {
+      const yOffset = -50; // Smaller offset for form scroll
+      const element = formContainerRef.current;
+      const y =
+        element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+      window.scrollTo({ top: y, behavior: "smooth" });
+    } else if (formRef.current) {
       await formRef.current.submitForm();
     }
   };
@@ -136,6 +157,7 @@ function Header() {
               </Button>
               <Button
                 variant="outlined"
+                onClick={handleLearnMore}
                 sx={{
                   color: "#445469",
                   borderColor: "#445469",
@@ -181,7 +203,7 @@ function Header() {
         </Grid>
 
         {/* Right section  */}
-        <Grid item xs={12} md={4}>
+        <Grid ref={formContainerRef} item xs={12} md={4}>
           <Box
             sx={{
               backgroundColor: "#FFFFFF",
