@@ -20,14 +20,15 @@
                     "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"johndoe@example.com\",\n  \"mobile\": \"9876543210\",\n  \"business_type\": \"Existing Entrepreneur Aiming to Scale Up\",\n  \"description\": \"Looking to expand business operations.\"\n}"
                 },
                 "url": {
-                    "raw": "http://localhost:3000/api/register",
+                    "raw": "http://localhost:8000/api/campaign/register",
                     "protocol": "http",
                     "host": [
                         "localhost"
                     ],
-                    "port": "3000",
+                    "port": "8000",
                     "path": [
                         "api",
+                        "campaign",
                         "register"
                     ]
                 }
@@ -40,15 +41,15 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                    "raw": "http://localhost:3000/api/registrations",
+                    "raw": "http://localhost:8000/api/campaign",
                     "protocol": "http",
                     "host": [
                         "localhost"
                     ],
-                    "port": "3000",
+                    "port": "8000",
                     "path": [
                         "api",
-                        "registrations"
+                        "campaign"
                     ]
                 }
             },
