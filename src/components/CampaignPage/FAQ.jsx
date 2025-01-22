@@ -91,7 +91,11 @@ export default function FAQ() {
         component="h2"
         align="center"
         gutterBottom
-        sx={{ mb: 6, fontWeight: "700", fontSize: "44px" }}
+        sx={{
+          mb: 6,
+          fontWeight: { xs: 600, md: 700 },
+          fontSize: { xs: "28px", md: "44px" },
+        }}
       >
         FAQ
       </Typography>

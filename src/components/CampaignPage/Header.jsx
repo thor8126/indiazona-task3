@@ -15,7 +15,7 @@ function Header() {
     <Box
       sx={{
         background: "linear-gradient(to bottom, #E9F5FF, #FFFDF8)",
-        padding: { xs: "40px 20px", md: 8 },
+        padding: { xs: "0 20px", md: 8 },
         paddingBottom: 0,
       }}
     >
