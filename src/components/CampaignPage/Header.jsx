@@ -9,7 +9,7 @@ function Header({ aboutCampaignRef }) {
 
   const handleLearnMore = () => {
     if (aboutCampaignRef?.current) {
-      const yOffset = -80; // Adjust this value to control how far from the top
+      const yOffset = -100; // Adjust this value to control how far from the top
       const element = aboutCampaignRef.current;
       const y =
         element.getBoundingClientRect().top + window.pageYOffset + yOffset;
@@ -20,7 +20,7 @@ function Header({ aboutCampaignRef }) {
 
   const handleRegister = async () => {
     if (isMobile && formContainerRef.current) {
-      const yOffset = -70; // Smaller offset for form scroll
+      const yOffset = -90; // Smaller offset for form scroll
       const element = formContainerRef.current;
       const y =
         element.getBoundingClientRect().top + window.pageYOffset + yOffset;
