@@ -40,5 +40,4 @@ Wishlist.init(
     updatedAt: "updated_at",
   }
 );
-
 module.exports = Wishlist;

@@ -1,6 +1,7 @@
 // User.js
 const { DataTypes, Model } = require("sequelize");
 const sequelize = require("../config/database");
+const Wishlist = require("./Wishlist");
 
 class User extends Model {}
 
@@ -120,6 +121,23 @@ User.init(
     timestamps: true,
     createdAt: "created_at",
     updatedAt: "updated_at",
+    hooks: {
+      afterCreate: async (user, options) => {
+        if (!user.id) {
+          console.error("User ID is undefined");
+          return;
+        }
+
+        await Wishlist.create(
+          {
+            user_id: user.id,
+          },
+          {
+            transaction: options.transaction,
+          }
+        );
+      },
+    },
   }
 );
 

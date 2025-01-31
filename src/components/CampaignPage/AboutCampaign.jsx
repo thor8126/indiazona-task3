@@ -9,21 +9,21 @@ const AboutCampaign = () => {
   const campaigns = [
     {
       icon: icon1,
-      title: "Empower women to start their business build their legacy",
+      title: "Empowering women to start their business & build their legacy",
     },
     {
       icon: icon2,
       title:
-        "Share the right knowledge, provide correct resources for them to succeed",
+        "Share the right knowledge, resources and guidance for them to succeed",
+    },
+    {
+      icon: icon4,
+      title: "Real-time support for government compliances including GST",
     },
     {
       icon: icon3,
       title:
-        "Compliances, Setting Up, & Operations with Indiazona. Including guidance on pricing, packaging, etc.",
-    },
-    {
-      icon: icon4,
-      title: "Partnership Incentives (Dealer Program)",
+        "Guidance on Indiazona operations, including pricing and packaging",
     },
   ];
 
