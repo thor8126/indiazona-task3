@@ -21,8 +21,15 @@ exports.createWishlist = async (req, res) => {
 
 exports.getUserWishlist = async (req, res) => {
   try {
+    // Changed from req.params.userId to req.body.user_id
+    const { user_id } = req.body;
+
+    if (!user_id) {
+      return res.status(400).json({ message: "User ID is required" });
+    }
+
     const wishlist = await Wishlist.findOne({
-      where: { user_id: req.params.userId },
+      where: { user_id },
       include: [
         {
           model: Collection,

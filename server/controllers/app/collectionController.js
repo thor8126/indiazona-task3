@@ -22,27 +22,29 @@ exports.createCollection = async (req, res) => {
 
 exports.getWishlistCollections = async (req, res) => {
   try {
+    // Get wishlist_id from body instead of URL params
+    const { wishlist_id } = req.body;
+
+    if (!wishlist_id) {
+      return res.status(400).json({ message: "Wishlist ID is required." });
+    }
+
     const collections = await Collection.findAll({
-      where: { wishlist_id: req.params.wishlistId }, // Match the wishlist ID to fetch collections
+      where: { wishlist_id },
       include: [
         {
-          model: Product, // Include Products associated with the Collection
-          include: [
-            { model: Brands }, // Corrected to match the imported model
-            { model: HSNCodes }, // Corrected to match the imported model
-          ],
+          model: Product,
+          include: [{ model: Brands }, { model: HSNCodes }],
         },
       ],
     });
 
-    // Handle the case where no collections are found
     if (!collections || collections.length === 0) {
       return res
         .status(404)
         .json({ message: "No collections found for this wishlist." });
     }
 
-    // Respond with the fetched collections
     res.status(200).json(collections);
   } catch (error) {
     console.error("Error fetching collections:", error);
@@ -54,11 +56,11 @@ exports.getWishlistCollections = async (req, res) => {
 
 exports.addCollectionItem = async (req, res) => {
   try {
-    const { product_id } = req.body;
-    const { collectionId } = req.params;
+    // Get both product_id and collection_id from body
+    const { product_id, collection_id } = req.body;
 
     // Validate input data
-    if (!product_id || !collectionId) {
+    if (!product_id || !collection_id) {
       return res
         .status(400)
         .json({ message: "Product ID and Collection ID are required." });
@@ -71,14 +73,14 @@ exports.addCollectionItem = async (req, res) => {
     }
 
     // Check if the collection exists
-    const collection = await Collection.findByPk(collectionId);
+    const collection = await Collection.findByPk(collection_id);
     if (!collection) {
       return res.status(404).json({ message: "Collection not found." });
     }
 
     // Create a new collection item
     const collectionItem = await CollectionItem.create({
-      collection_id: collectionId,
+      collection_id,
       product_id,
     });
 
@@ -97,12 +99,22 @@ exports.addCollectionItem = async (req, res) => {
 
 exports.removeCollectionItem = async (req, res) => {
   try {
+    // Get collection_id and product_id from body
+    const { collection_id, product_id } = req.body;
+
+    if (!collection_id || !product_id) {
+      return res.status(400).json({
+        message: "Collection ID and Product ID are required.",
+      });
+    }
+
     const deleted = await CollectionItem.destroy({
       where: {
-        collection_id: req.params.collectionId,
-        product_id: req.params.productId,
+        collection_id,
+        product_id,
       },
     });
+
     if (deleted) {
       res.json({ message: "Item removed from collection" });
     } else {
@@ -110,5 +122,31 @@ exports.removeCollectionItem = async (req, res) => {
     }
   } catch (error) {
     res.status(400).json({ message: error.message });
+  }
+};
+
+exports.deleteCollection = async (req, res) => {
+  try {
+    // Get collection_id from body
+    const { collection_id } = req.body;
+
+    if (!collection_id) {
+      return res.status(400).json({ message: "Collection ID is required." });
+    }
+
+    // Check if collection exists
+    const collection = await Collection.findByPk(collection_id);
+
+    if (!collection) {
+      return res.status(404).json({ message: "Collection not found" });
+    }
+
+    // Delete the collection
+    await collection.destroy();
+
+    res.status(200).json({ message: "Collection deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting collection:", error);
+    res.status(500).json({ message: error.message });
   }
 };

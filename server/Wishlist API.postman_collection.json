@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "ecf711f5-b4aa-4411-8813-bd2b5a7b3954",
-		"name": "Wishlist API Copy",
+		"_postman_id": "fef9b5a2-7a8c-4eaf-aa6a-3c4caffd8d93",
+		"name": "Wishlist API",
 		"description": "Complete API collection for Wishlist management system",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "25069870"
@@ -111,13 +111,13 @@
 			"name": "Wishlists",
 			"item": [
 				{
-					"name": "Create/Get Wishlist",
+					"name": "Get User's Wishlist",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"user_id\": 1,\n    \"name\": \"My Shopping List\"\n}",
+							"raw": "{\n    \"user_id\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -125,33 +125,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/api/wishlists",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"wishlists"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get User's Wishlist",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/api/wishlists/user/1",
+							"raw": "{{base_url}}/api/wishlists/user",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
 								"wishlists",
-								"user",
-								"1"
+								"user"
 							]
 						}
 					},
@@ -190,20 +171,28 @@
 					"response": []
 				},
 				{
-					"name": "Get Wishlist Collections",
+					"name": "Delete Collection",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"collection_id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{base_url}}/api/wishlists/1/collections",
+							"raw": "{{base_url}}/api/collections/delete",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
-								"wishlists",
-								"1",
-								"collections"
+								"collections",
+								"delete"
 							]
 						}
 					},
@@ -221,7 +210,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"product_id\": 1\n}",
+							"raw": "{\n    \"product_id\": 1,\n    \"collection_id\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -229,15 +218,15 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/api/collections/1/items",
+							"raw": "{{base_url}}/api/collections/items/add",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
 								"collections",
-								"1",
-								"items"
+								"items",
+								"add"
 							]
 						}
 					},
@@ -246,19 +235,27 @@
 				{
 					"name": "Remove Item from Collection",
 					"request": {
-						"method": "DELETE",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"collection_id\": 1,\n    \"product_id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{base_url}}/api/collections/1/items/1",
+							"raw": "{{base_url}}/api/collections/items/remove",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
 								"collections",
-								"1",
 								"items",
-								"1"
+								"remove"
 							]
 						}
 					},
